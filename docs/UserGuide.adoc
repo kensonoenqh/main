@@ -146,7 +146,7 @@ Examples:
 
 Expected output:
 
-* Returns a list of all expenses for the current month.R
+* Returns a list of all expenses for the current month.
 * Returns a list of all food expenses for the specified month.
 
 === Displaying help page: `help`
