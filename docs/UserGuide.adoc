@@ -135,9 +135,23 @@ Expected output:
 
 * Adds the expense spent on Laksa back to THRIFT.
 
+=== List expenses for the month: `list`
+
+Format: `list`
+
+Examples:
+
+*  `list`
+*  `list m/Jan t/Food`
+
+Expected output:
+
+* Returns a list of all expenses for the current month and remaining budget left.
+* Returns a list of all food expenses for the specified month and remaining budget left.
+
 === Displaying help page: `help`
 
-Format: `help [COMMAND]`
+Format: `list m/MONTH [t/TAG]`
 
 Examples:
 
@@ -182,7 +196,12 @@ Example: `add income n/Allowance c/1000 t/Monthly`
 Example: `delete i/1`
 * *Undo*: `undo`
 * *Redo*: `redo`
+* *List*: `list m/MONTH [t/TAG]` +
+Example: `list m/Jan t/Food`
 * *Help*: `help [COMMAND]` +
 Example: `help delete`
 * *Exit*: `exit`
+
+
+
 
