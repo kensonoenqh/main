@@ -146,12 +146,12 @@ Examples:
 
 Expected output:
 
-* Returns a list of all expenses for the current month and remaining budget left.
-* Returns a list of all food expenses for the specified month and remaining budget left.
+* Returns a list of all expenses for the current month.R
+* Returns a list of all food expenses for the specified month.
 
 === Displaying help page: `help`
 
-Format: `list m/MONTH [t/TAG]`
+Format: `help [COMMAND]`
 
 Examples:
 
