@@ -191,7 +191,7 @@ Expected output:
 [[ListTag]]
 === List expenses for the month: `list`
 
-Format: `list`
+Format: `list [m/MONTH] [t/TAG]`
 
 Examples:
 
@@ -256,7 +256,7 @@ Example: `update i/1 | n/Curry Laksa`
 Example: `clone i/1`
 * <<UndoTag, *Undo*>>: `undo`
 * <<RedoTag, *Redo*>>: `redo`
-* <<ListTag, *List*>>: `list m/MONTH [t/TAG]` +
+* <<ListTag, *List*>>: `list [m/MONTH] [t/TAG]` +
 Example: `list m/Jan t/Food`
 * <<HelpTag, *Help*>>: `help [COMMAND]` +
 Example: `help delete`
