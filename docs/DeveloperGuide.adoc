@@ -616,26 +616,6 @@ _Use case ends_
 _Use case ends_
 
 [discrete]
-=== Use case: List monthly expenses
-
-*MSS*
-
-1. User requests to view list of expenses for a specific month.
-2. THRIFT displays expenses of that month.
-+
-_Use case ends_
-
-*Extensions*
-
-[none]
-* 1a. The command specified by the user is not valid.
-+
-[none]
-** 1a1. THRIFT displays an invalid command error to user.
-+
-_Use case ends_
-
-[discrete]
 === Use case: List monthly transactions.
 
 *MSS*
@@ -649,6 +629,7 @@ _Use case ends_
 === Use case: Tagging a transaction
 
 *MSS*
+= *Extensions*
 
 1. User requests to tag a specific transaction.
 2. THRIFT processes the request and adds the tag to the specific transaction.
