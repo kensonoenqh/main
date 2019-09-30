@@ -616,7 +616,7 @@ _Use case ends_
 _Use case ends_
 
 [discrete]
-=== Use case: Listing monthly expenses
+=== Use case: List monthly expenses
 
 *MSS*
 
@@ -636,16 +636,15 @@ _Use case ends_
 _Use case ends_
 
 [discrete]
-<<<<<<< HEAD
-=== Use case: Listing monthly expenses
+=== Use case: List monthly transactions.
 
 *MSS*
 
-1. User requests to view list of expenses for a specific month.
-2. THRIFT displays expenses of that month.
+1. User requests to view list of transactions for a specific month.
+2. THRIFT displays transactions of that month.
 +
-Use case ends
-=======
+_Use case ends_
+
 === Use case: Tagging a transaction
 
 *MSS*
@@ -654,23 +653,14 @@ Use case ends
 2. THRIFT processes the request and adds the tag to the specific transaction.
 +
 _Use case ends_
->>>>>>> 92b27e17c2b34c721263e4bb92c0066a3cbe5722
 
 *Extensions*
 
 [none]
-<<<<<<< HEAD
 * 1a. The command specified by the user is not valid.
 +
 [none]
 ** 1a1. THRIFT displays an invalid command error to user.
-+
-Use case ends.
-=======
-* 1a. The parameters specified by the user are not valid.
-+
-[none]
-** 1a1. THRIFT displays an invalid parameter error to the user and the transaction is not updated.
 +
 _Use case ends_
 
@@ -734,7 +724,6 @@ _Use case ends_
 ** 1a1. THRIFT displays an invalid parameter error to the user.
 +
 _Use case ends_
->>>>>>> 92b27e17c2b34c721263e4bb92c0066a3cbe5722
 
 [appendix]
 == Non Functional Requirements
