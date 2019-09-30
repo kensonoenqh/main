@@ -616,7 +616,7 @@ _Use case ends_
 _Use case ends_
 
 [discrete]
-=== Use case: List monthly transactions.
+=== Use case: List monthly transactions
 
 *MSS*
 
