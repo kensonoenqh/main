@@ -645,6 +645,7 @@ _Use case ends_
 +
 _Use case ends_
 
+[discrete]
 === Use case: Tagging a transaction
 
 *MSS*
@@ -835,7 +836,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `clone` +
    Expected: No changes. Error details shown in status message.
 
-=== Listing the transactions.
+=== Listing the transactions
 
 . Listing out transactions by month or by tag.
 
