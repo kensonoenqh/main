@@ -822,11 +822,11 @@ These instructions only provide a starting point for testers to work on; testers
 . Listing out transactions by month or by tag.
 
 .. Prerequisites: At least one transaction in the list.
-.. Test case: `list`
+.. Test case: `list` +
    Expected: The entire list of transactions will be shown.
-.. Test case: `list m/Jan`
+.. Test case: `list m/Jan` +
    Expected: The list of transactions for January will be shown.
-.. Test case: `list m/Jan t/Food`
+.. Test case: `list m/Jan t/Food` +
    Expected: The list of transactions related to food for January will be shown.
 
 === Tagging a transaction
