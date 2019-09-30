@@ -28,8 +28,8 @@ THRIFT is for money-conscious NUS students who wish to track their spending, in 
 4. Double-click the file to start the app, the GUI should appear in a few seconds.
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing `help` and pressing `Enter` will open the help window.
 6. Some example commands you can try:
-*   `add expense n/Apple Airpods c/200`: adds an expense called `Apple Airpods` which cost $`200`.
-*   `add income n/Bursary Award c/350`: adds an income called `Bursary Award` which incremented your budget by $`350`.
+*   `add_expense n/Apple Airpods c/200`: adds an expense called `Apple Airpods` which cost $`200`.
+*   `add_income n/Bursary Award c/350`: adds an income called `Bursary Award` which incremented your budget by $`350`.
 *   `delete i/1`: deletes the 1st transaction in the current list shown in the UI.
 
 
@@ -43,17 +43,17 @@ Command format:
 *   Items with `...` after them can be used multiple times including zero times e.g. `[t/TAG] …` can be used as ` ` (i.e. 0 times), `t/Food t/Dinner` etc.
 *   Parameters can be in any order e.g. if the command specifies `n/EXPENSE_NAME c/COST`, `c/COST n/EXPENSE_NAME` will achieve the same outcome.
 
+[[ExpenseTag]]
+=== Adding an expense: `add_expense`
 
-=== Adding an expense: `add expense`
-
-Format: `add expense n/EXPENSE_NAME c/COST [t/TAG]...`
+Format: `add_expense n/EXPENSE_NAME c/COST [t/TAG]...`
 
 TIP: The default currency is in Singapore Dollars (SGD). You are recommended to `convert` foreign currencies to SGD before adding the value as the COST.
 
 Examples:
 
-*   `add expense n/Laksa c/10.50 t/Lunch t/Food`
-*   `add expense n/Travel c/53 t/Travel`
+*   `add_expense n/Laksa c/10.50 t/Lunch t/Food`
+*   `add_expense n/Travel c/53 t/Travel`
 
 Expected output:
 
@@ -61,18 +61,22 @@ Expected output:
 *   `New entry added: 2. [-] Travel ($53) [Travel]`
 
 
-=== Adding an income: `add income`
+[[IncomeTag]]
+=== Adding an income: `add_income`
 
-Format: `add income n/INCOME_NAME c/COST [t/TAG]...`
+Format: `add_income n/INCOME_NAME c/COST [t/TAG]...`
 
 Examples:
 
-*   `add income n/Allowance c/1000 t/Monthly`
+*   `add_income n/Allowance c/1000 t/Monthly`
 
 Expected output:
 
 *   `New entry added: 3. [+] Allowance ($1000) [Monthly]`
 
+
+
+[[DeleteTag]]
 === Deleting a Transaction: `delete`
 
 Format: `delete i/INDEX`
@@ -91,6 +95,126 @@ Expected output:
 
 *   `Entry deleted: 1. Laksa ($10.50) [Lunch][Food]`
 
+
+[[UpdateTag]]
+=== Updating a Transaction’s details: `update`
+
+Format: `update i/INDEX | PREFIX_LETTER/UPDATED_DETAILS`
+
+****
+* Updates the Transaction's details at the specified `INDEX`.
+** `INDEX` refers to the index number currently shown in the UI, and must be a *positive integer*.
+* `PREFIX_LETTER` specifies type of detail to be updated, e.g. `n/` for name.
+* `UPDATED_DETAILS` are the new details of type corresponding to `PREFIX_LETTER` that the Transaction is to be updated with.
+****
+
+Examples:
+
+*   `update i/1 | n/Curry Laksa`
+*   `update i/1 | c/11`
+
+Expected output: +
+
+NOTE: Assume 2nd command occurs after 1st
+
+*   `Entry name updated: 1. [-] Curry Laksa ($10.50) [Lunch][Food] +
+Original name was: Laksa`
+*   `Entry cost updated: 1. [-] Curry Laksa ($11) [Lunch][Food] +
+Original cost was: $10.50`
+// end::update[]
+
+//tag::tag[]
+[[TagTag]]
+=== Tag transaction: `tag`
+
+Format: `tag i/INDEX t/TAG_NAME`
+
+****
+* Tags the transaction at the specified `INDEX` with `TAG_NAME`.
+* `INDEX` refers to the index number currently shown in the UI (after filtering, if any).
+* `INDEX` *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+*   `tag i/8 t/Debt`
+
+Expected output:
+
+*   `Entry tagged: 8. Student Loan ($12000.00) [Debt]`
+
+// end::tag[]
+
+// tag::untag[]
+[[UntagTag]]
+=== Tag transaction: `untag`
+
+Format: `untag i/INDEX t/TAG_NAME`
+
+****
+* Untags `TAG_NAME` from the transaction at the specified `INDEX`.
+* `INDEX` refers to the index number currently shown in the UI (after filtering, if any).
+* `INDEX` *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+*   `untag i/7 t/Important`
+
+Expected output:
+
+*   `Entry untagged: 7. DoTA Arcanas ($49.00) [Game]`
+
+// end::untag[]
+
+// tag::convert[]
+[[ConvertTag]]
+=== Convert currency: `convert`
+
+Format: `convert to/TARGET_CURRENCY (c/COST|i/INDEX)`
+
+****
+* Converts the a fixed value or `Transaction` entry
+* Only one of either `VALUE` or `INDEX` is allowed per command
+* `VALUE` must be positive.
+* `INDEX` refers to the index number currently shown in the UI (after filtering, if any).
+* `INDEX` *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+*   `convert to/USD v/1000`
+
+*   `convert to/JPY i/8`
+
+Expected output:
+
+*   `Value converted: SGD1000 = USD725.82`
+
+*   `Entry converted: 8. Student Loan (¥934,566.00) [Debt]`
+// end::convert[]
+
+// tag::clone[]
+[[CloneTag]]
+=== Cloning a Transaction: `clone`
+
+Format: `clone i/INDEX`
+
+****
+* Clones (creates a duplicate of) a Transaction.
+* Clone produced is added to a new index at the bottom of the list.
+****
+
+*   `clone i/1`
+
+Expected output: +
+
+NOTE: Assume entry at index 1 is `1. [-] Laksa ($10.50) [Lunch][Food]` and there are no other entries.
+
+*   `New entry added: 2. [-] Laksa ($10.50) [Lunch][Food]`
+// end::clone[]
+
+[[UndoTag]]
 === Undoing the previous undoable command: `undo`
 
 Format: `undo`
@@ -98,8 +222,8 @@ Format: `undo`
 NOTE: Undoable commands are commands that modify the data of THRIFT application.
 
 .List of undoable commands[[Undoable]]:
-* <<Adding an expense: `add expense`, add expense>>
-* <<Adding an income: `add income`, add income>>
+* <<Adding an expense: `add_expense`, add_expense>>
+* <<Adding an income: `add_income`, add_income>>
 * <<Deleting a Transaction: `delete`, delete>>
 * update
 * clone
@@ -107,10 +231,10 @@ NOTE: Undoable commands are commands that modify the data of THRIFT application.
 
 Examples:
 
-* `add expense n/Laksa c/10.50 t/Lunch t/Food` +
+* `add_expense n/Laksa c/10.50 t/Lunch t/Food` +
   `undo`
 
-* `add income n/Allowance c/1000 t/Monthly` +
+* `add_income n/Allowance c/1000 t/Monthly` +
   `list` +
   `undo`
 
@@ -119,6 +243,8 @@ Expected output:
 * Deletes the expense spent on Laksa from THRIFT.
 * Deletes the allowance income from THRIFT.
 
+
+[[RedoTag]]
 === Redoing the undone command: `redo`
 
 Redo the <<Undoable, undoable command>> that was previously undone by the user.
@@ -127,13 +253,32 @@ Format: `redo`
 
 Examples:
 
-* `add expense n/Laksa c/10.50 t/Lunch t/Food` +
+* `add_expense n/Laksa c/10.50 t/Lunch t/Food` +
   `undo` +
   `redo`
 
 Expected output:
 
 * Adds the expense spent on Laksa back to THRIFT.
+
+
+[[ListTag]]
+=== List expenses for the month: `list`
+
+Format: `list [m/MONTH] [t/TAG]`
+
+Examples:
+
+*  `list`
+*  `list m/Jan t/Food`
+
+Expected output:
+
+* Returns a list of all expenses for the current month.
+* Returns a list of all food expenses for the specified month.
+
+[[HelpTag]]
+
 
 === Displaying help page: `help`
 
@@ -149,9 +294,11 @@ Expected output:
 * Displays a detailed list of information regarding all the THRIFT commands.
 * Returns syntax of `delete` command.
 
+[[ExitTag]]
 === Exiting THRIFT application: `exit`
 
 Format: `exit`
+
 
 === Generating an external report `[coming in v2.0]`
 
@@ -174,15 +321,31 @@ If you are especially conscious about having your data spied on, this function w
 *A*: Runs the application in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous THRIFT application.
 
 == Command summary
-* *Expense*:  `add expense n/EXPENSE_NAME c/COST [t/TAG]...` +
-Example: `add expense n/Laksa c/10.50 t/Lunch t/Food`
-* *Income*: `add income n/INCOME_NAME c/COST [t/TAG]...` +
-Example: `add income n/Allowance c/1000 t/Monthly`
-* *Delete*: `delete i/INDEX` +
+* <<ExpenseTag, *Expense*>>:  `add_expense n/EXPENSE_NAME c/COST [t/TAG]...` +
+Example: `add_expense n/Laksa c/10.50 t/Lunch t/Food`
+* <<IncomeTag, *Income*>>: `add_income n/INCOME_NAME c/COST [t/TAG]...` +
+Example: `add_income n/Allowance c/1000 t/Monthly`
+* <<DeleteTag, *Delete*>>: `delete i/INDEX` +
 Example: `delete i/1`
-* *Undo*: `undo`
-* *Redo*: `redo`
-* *Help*: `help [COMMAND]` +
+* <<UpdateTag, *Update*>>: `update i/INDEX | PREFIX_LETTER/UPDATED_DETAILS` +
+Example: `update i/1 | n/Curry Laksa`
+* <<CloneTag, *Clone*>>: `clone i/INDEX` +
+Example: `clone i/1`
+* <<UndoTag, *Undo*>>: `undo`
+* <<RedoTag, *Redo*>>: `redo`
+* <<ListTag, *List*>>: `list [m/MONTH] [t/TAG]` +
+Example: `list m/Jan t/Food`
+* <<HelpTag, *Help*>>: `help [COMMAND]` +
+* <<TagTag,*Tag*>>: `tag i/INDEX t/TAG_NAME` +
+Example: `tag i/8 t/Debt`
+* <<UntagTag, *Untag*>>: `untag i/INDEX t/TAG_NAME` +
+Example: `untag i/7 t/Important`
+* <<ConvertTag, *Convert*>>: `convert to/TARGET_CURRENCY (c/COST|i/INDEX)` +
+Examples: +
+ `convert c/USD v/1000` +
+ `convert c/JPY i/8`
+* <<UndoTag, *Undo*>>: `undo`
+* <<RedoTag, *Redo*>>: `redo`
+* <<HelpTag, *Help*>>: `help [COMMAND]` +
 Example: `help delete`
-* *Exit*: `exit`
-
+* <<ExitTag, *Exit*>>: `exit`
