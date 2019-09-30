@@ -729,7 +729,17 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `clone` +
    Expected: No changes. Error details shown in status message.
 
-_{ more test cases ... }_
+=== Listing transactions
+
+. List out transactions.
+
+.. Prerequisites: At least one transaction in the list.
+.. Test case: `list`
+   Expected: The entire list of transactions will be shown.
+.. Test case: `list m/Jan`
+   Expected: The list of transactions for January will be shown.
+.. Test case: `list m/Jan t/Food`
+   Expected: The list of transactions related to food for January will be shown.
 
 === Saving data
 
