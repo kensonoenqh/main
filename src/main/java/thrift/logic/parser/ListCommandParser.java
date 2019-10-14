@@ -1,6 +1,6 @@
 package thrift.logic.parser;
 
-import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import thrift.commons.core.Messages;
@@ -20,22 +20,24 @@ public class ListCommandParser implements Parser<ListCommand> {
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_MONTH ,CliSyntax.PREFIX_TAG);
+        Optional<String> monthArg = argMultimap.getValue(CliSyntax.PREFIX_MONTH);
+        Optional<String> tagArg = argMultimap.getValue(CliSyntax.PREFIX_TAG);
         if (args.isEmpty()) {
-            return new ListCommand(); //list all transactions
+            return new ListCommand();       //list all transactions
         } else if (!argMultimap.getValue(CliSyntax.PREFIX_MONTH).isEmpty() &&
                 !argMultimap.getValue(CliSyntax.PREFIX_TAG).isEmpty()) {
-            String month = argMultimap.getValue(CliSyntax.PREFIX_MONTH).get();
-            String tag = argMultimap.getValue(CliSyntax.PREFIX_TAG).get();
-            return new ListCommand(); //list all transactions filtered by both month and tag, coming in v1.3
+            String month = monthArg.get();
+            String tag = tagArg.get();
+            return new ListCommand();       //list all transactions filtered by both month and tag, coming in v1.3
         } else if (!argMultimap.getValue(CliSyntax.PREFIX_MONTH).isEmpty() &&
                 argMultimap.getValue(CliSyntax.PREFIX_TAG).isEmpty()) {
-            String month = argMultimap.getValue(CliSyntax.PREFIX_MONTH).get();
-            return new ListCommand(); //list all transactions filtered by month, coming in v1.3
+            String month = monthArg.get();
+            return new ListCommand();       //list all transactions filtered by month, coming in v1.3
         } else if (argMultimap.getValue(CliSyntax.PREFIX_MONTH).isEmpty() &&
                 !argMultimap.getValue(CliSyntax.PREFIX_TAG).isEmpty()) {
-            String month = argMultimap.getValue(CliSyntax.PREFIX_MONTH).get();
-            return new ListCommand(); //list all transactions filtered by month, coming in v1.3
-        } else { //bad args input or wrong prefixes used will throw the parseexception
+            String tag = tagArg.get();
+            return new ListCommand();       //list all transactions filtered by tag, coming in v1.3
+        } else {                            //bad args input or wrong prefixes used will throw the parseexception
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
