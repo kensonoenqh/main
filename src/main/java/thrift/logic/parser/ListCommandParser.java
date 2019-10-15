@@ -22,7 +22,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         return getCommand(argMultimap);
     }
 
-    public ListCommand getCommand(ArgumentMultimap argMultimap) throws ParseException {
+    private ListCommand getCommand(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> month = argMultimap.getValue(CliSyntax.PREFIX_MONTH);
         Optional<String> tag = argMultimap.getValue(CliSyntax.PREFIX_TAG);
         if (month.isEmpty() && tag.isEmpty()) {
@@ -33,7 +33,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListCommand(); //filter by month, coming in v1.3
         } else if (month.isEmpty() && !tag.isEmpty()) {
             return new ListCommand(); //filter by tag, coming in v1.3
-        } else { //bad args input or wrong prefixes used will throw the parseexception
+        } else { //bad args input or wrong prefixes used will throw the ParseException
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
