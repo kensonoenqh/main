@@ -1,7 +1,6 @@
 package thrift.logic.parser;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import thrift.commons.core.Messages;
 import thrift.logic.commands.ListCommand;
@@ -19,39 +18,25 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_MONTH ,CliSyntax.PREFIX_TAG);
-        Optional<String> monthArg = argMultimap.getValue(CliSyntax.PREFIX_MONTH);
-        Optional<String> tagArg = argMultimap.getValue(CliSyntax.PREFIX_TAG);
-        if (args.isEmpty()) {
-            return new ListCommand();       //list all transactions
-        } else if (!argMultimap.getValue(CliSyntax.PREFIX_MONTH).isEmpty() &&
-                !argMultimap.getValue(CliSyntax.PREFIX_TAG).isEmpty()) {
-            String month = monthArg.get();
-            String tag = tagArg.get();
-            return new ListCommand();       //list all transactions filtered by both month and tag, coming in v1.3
-        } else if (!argMultimap.getValue(CliSyntax.PREFIX_MONTH).isEmpty() &&
-                argMultimap.getValue(CliSyntax.PREFIX_TAG).isEmpty()) {
-            String month = monthArg.get();
-            return new ListCommand();       //list all transactions filtered by month, coming in v1.3
-        } else if (argMultimap.getValue(CliSyntax.PREFIX_MONTH).isEmpty() &&
-                !argMultimap.getValue(CliSyntax.PREFIX_TAG).isEmpty()) {
-            String tag = tagArg.get();
-            return new ListCommand();       //list all transactions filtered by tag, coming in v1.3
-        } else {                            //bad args input or wrong prefixes used will throw the parseexception
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_MONTH, CliSyntax.PREFIX_TAG);
+        return getCommand(argMultimap);
+    }
+
+    public ListCommand getCommand(ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> month = argMultimap.getValue(CliSyntax.PREFIX_MONTH);
+        Optional<String> tag = argMultimap.getValue(CliSyntax.PREFIX_TAG);
+        if (month.isEmpty() && tag.isEmpty()) {
+            return new ListCommand(); //list all transactions
+        } else if (!month.isEmpty() && !tag.isEmpty()) {
+            return new ListCommand(); //filter by both month and tag, coming in v1.3
+        } else if (!month.isEmpty() && tag.isEmpty()) {
+            return new ListCommand(); //filter by month, coming in v1.3
+        } else if (month.isEmpty() && !tag.isEmpty()) {
+            return new ListCommand(); //filter by tag, coming in v1.3
+        } else { //bad args input or wrong prefixes used will throw the parseexception
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
-    }
-
-    /**
-     * This methods checks if the required prefixes are present in the {@code ArgumentMultimap}.
-     *
-     * @param argumentMultimap the object to check for the existence of prefixes.
-     * @param prefixes variable amount of {@code Prefix} to confirm the existence of.
-     * @return true if specified prefixes are present in the argumentMultimap.
-     */
-    protected static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
