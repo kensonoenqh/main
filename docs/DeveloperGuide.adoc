@@ -375,7 +375,7 @@ The *List* command allows the user to bring up a list of `**Transactions**`, and
 This feature is implemented by using a `**Predicate<Transaction>**` to filter the `**Transactions**` by month or tags.
 
 ==== Implementation
-`**List**` is  instantiated by either `ListCommandParser#parse(String args)`,
+`**ListCommand**` is instantiated by `ListCommandParser#parse(String args)`,
 which attempts to parse the various parameters supplied in `args` and return a `**ListCommand**` object.
 
 The following conditions will cause a `**ParseException**` to be thrown by the parser:
