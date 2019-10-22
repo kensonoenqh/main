@@ -1,7 +1,10 @@
 package thrift.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static thrift.commons.core.Messages.MESSAGE_INVALID_MONTH_FORMAT;
 
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -95,5 +98,22 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String month} into a {@code Month}.
+     *
+     * @throws ParseException if the given {@code month} is invalid.
+     */
+    public static Month parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        try {
+            String pattern = "MMMM";
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            String monthCaps = sdf.format(sdf.parse(month)).toUpperCase();
+            return Month.valueOf(monthCaps);
+        } catch (java.text.ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_MONTH_FORMAT));
+        }
     }
 }

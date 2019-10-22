@@ -11,5 +11,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX =
             "The transaction index provided is invalid";
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "%1$d transactions listed!";
+    public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format! \n%1$s";
+
 
 }
