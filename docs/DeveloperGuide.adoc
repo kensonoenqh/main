@@ -402,7 +402,7 @@ Step 5. The final list of filtered transactions will be brought up.
 The activity diagram below will give an overview of what is happening when the command is executed.
 
 .Activity diagram of the command execution.
-image::List/ListActivityDiagram.png[]
+image::list/ListActivityDiagram.PNG[]
 
 ==== Design Considerations
 
