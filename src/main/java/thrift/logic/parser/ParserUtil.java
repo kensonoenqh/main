@@ -3,6 +3,8 @@ package thrift.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static thrift.model.transaction.Budget.BUDGET_DATE_FORMAT;
 
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -28,6 +30,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_CURRENCY = "Currency entered is not valid. (Must exist)";
+    public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -163,5 +166,22 @@ public class ParserUtil {
             currencyList.add(currency.split(" ")[0]);
         }
         return currencyList;
+    }
+
+    /**
+     * Parses a {@code String month} into a {@code Month}.
+     *
+     * @throws ParseException if the given {@code month} is invalid.
+     */
+    public static Month parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        try {
+            String pattern = "MMMM";
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            String monthCaps = sdf.format(sdf.parse(month)).toUpperCase();
+            return Month.valueOf(monthCaps);
+        } catch (java.text.ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_MONTH_FORMAT);
+        }
     }
 }
