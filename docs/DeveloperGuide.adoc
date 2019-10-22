@@ -494,14 +494,14 @@ image::list/ListActivityDiagram.PNG[]
 
 ==== Design Considerations
 
-===== Aspect: Using Predicates to improve extendability of the feature in the future
+===== Aspect: Using **Predicate** to improve extendability of the feature in the future
 
-* **Alternative 1 (current choice):** Create a new predicate based on the arguments each time.
+* **Alternative 1 (current choice):** Create a new **Predicate** based on the arguments each time.
 ** Pros: The filter feature could be easily improved in the future to further accommodate new arguments other than month and tag.
 ** Cons: Not as easy to implement.
-* **Alternative 2:** Use a fixed Predicate written beforehand to filter the list for each argument.
-** Pros: Straightforward to implement, a specific Predicate can be used for the specific argument.
-** Cons: Not easily extendable as in the future if we want to filter by new arguments, more predicates will have to be written.
+* **Alternative 2:** Use a fixed **Predicate** written beforehand to filter the list for each argument.
+** Pros: Straightforward to implement, a specific **Predicate** can be used for the specific argument.
+** Cons: Not easily extendable as in the future if we want to filter by new arguments, we will have to write a new **Predicate** for each argument.
 // end::Filtering transactions[]
 
 // tag::undoredo[]
