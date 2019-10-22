@@ -24,23 +24,27 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)
                 && !args.isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE));
+                    ListCommand.MESSAGE_USAGE)); //prefix m/ is not present so there are invalid arguments
         }
 
         return getCommand(argMultimap);
     }
 
     private ListCommand getCommand(ArgumentMultimap argMultimap) throws ParseException {
-        if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)) {
+        if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)
+                && !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListCommand.MESSAGE_USAGE)); //prefix m/ exists, but there is invalid preamble before the prefix.
+        } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)) {
             try {
-                Month month = ParserUtil.parseMonth(argMultimap.getValue(CliSyntax.PREFIX_MONTH).get());
-                System.out.println(month);
+                Month month = ParserUtil.parseMonth(argMultimap.getValue(CliSyntax.PREFIX_MONTH).get()); //to be used
             } catch (Exception e) {
                 throw new ParseException(String.format(Messages.MESSAGE_INVALID_MONTH_FORMAT,
-                        ListCommand.MESSAGE_MONTH));            }
-            return new ListCommand(); //filter by month
+                        ListCommand.MESSAGE_MONTH));
+            }
+            return new ListCommand(); //filter by month tbc, to look like return new ListCommand(month);
         } else {
-            return new ListCommand();
+            return new ListCommand(); //list all transactions, as prefix m/ does not exist.
         }
     }
 
