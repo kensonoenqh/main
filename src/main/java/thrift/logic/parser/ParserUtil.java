@@ -30,7 +30,6 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_CURRENCY = "Currency entered is not valid. (Must exist)";
-    public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -181,7 +180,7 @@ public class ParserUtil {
             String monthCaps = sdf.format(sdf.parse(month)).toUpperCase();
             return Month.valueOf(monthCaps);
         } catch (java.text.ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_MONTH_FORMAT);
+            throw new ParseException(ListCommandParser.MESSAGE_INVALID_MONTH_FORMAT);
         }
     }
 }

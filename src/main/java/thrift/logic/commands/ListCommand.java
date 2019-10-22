@@ -14,8 +14,6 @@ public class ListCommand extends NonScrollingCommand {
 
     public static final String MESSAGE_SUCCESS = "Listed all transactions";
 
-    public static final String MESSAGE_MONTH = CliSyntax.PREFIX_MONTH + "MONTH (must be of format m/MMM)";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": lists all transactions or list transactions filtered by month.\n"
             + "Parameters: "
