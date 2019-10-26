@@ -204,7 +204,12 @@ public class AddIncomeCommandTest {
         }
 
         @Override
-        public void setBudget(Budget budget) {
+        public Optional<Budget> setBudget(Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetBudgetForThatMonth(Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -215,11 +220,6 @@ public class AddIncomeCommandTest {
 
         @Override
         public void setTransactionWithIndex(Index actualIndex, Transaction updatedTransaction) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Transaction getLastTransactionFromThrift() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -255,6 +255,26 @@ public class AddIncomeCommandTest {
 
         @Override
         public double getBalance() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateExpenseForCurrentMonth() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public double getExpense() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateIncomeForCurrentMonth() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public double getIncome() {
             throw new AssertionError("This method should not be called.");
         }
 

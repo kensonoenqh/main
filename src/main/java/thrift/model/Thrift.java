@@ -86,10 +86,23 @@ public class Thrift implements ReadOnlyThrift {
 
     /**
      * Adds the specified {@code budget} into the budget list, updates the budget instead if it already exists.
+     *
+     * @param budget budget to be replaced with.
+     * @return replaced budget wrapped in optional.
      */
-    public void setBudget(Budget budget) {
+    public Optional<Budget> setBudget(Budget budget) {
         requireNonNull(budget);
-        budgets.setBudget(budget);
+        return budgets.setBudget(budget);
+    }
+
+    /**
+     * Removes {@code budget} from budgets.
+     *
+     * @param budget is the budget to be removed.
+     */
+    public void removeBudget(Budget budget) {
+        requireNonNull(budget);
+        budgets.removeBudget(budget);
     }
 
     /**
@@ -116,15 +129,6 @@ public class Thrift implements ReadOnlyThrift {
     public boolean hasTransaction(Transaction t) {
         requireNonNull(t);
         return transactions.contains(t);
-    }
-
-    /**
-     * Retrieve the last transaction from transaction list.
-     *
-     * @return the last transaction from transaction list.
-     */
-    public Transaction getLastTransaction() {
-        return transactions.getLast();
     }
 
     /**

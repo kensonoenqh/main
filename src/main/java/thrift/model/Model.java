@@ -109,8 +109,18 @@ public interface Model {
 
     /**
      * Sets the monthly budget to the specified budget.
+     *
+     * @param budget is the budget to be replaced.
+     * @return replaced budget wrapped in optional.
      */
-    void setBudget(Budget budget);
+    Optional<Budget> setBudget(Budget budget);
+
+    /**
+     * Resets the monthly budget to null.
+     *
+     * @param budget is the budget to be removed.
+     */
+    void resetBudgetForThatMonth(Budget budget);
 
     /**
      * Replaces the given transaction {@code target} with {@code updatedTransaction}.
@@ -123,13 +133,6 @@ public interface Model {
      * {@code actualIndex} must be a valid {@code Index}.
      */
     void setTransactionWithIndex(Index actualIndex, Transaction updatedTransaction);
-
-    /**
-     * Gets the last transaction from thrift's transaction list
-     *
-     * @return the last transaction from thrift's transaction list
-     */
-    Transaction getLastTransactionFromThrift();
 
     /** Returns the current month and year in MMM yyyy format. */
     String getCurrentMonthYear();
@@ -159,6 +162,26 @@ public interface Model {
      * Returns the balance held by the model to update the GUI with.
      */
     double getBalance();
+
+    /**
+     * Updates the expense tracked by the model by summing values from the {@code Transaction} in the filteredList.
+     */
+    void updateExpenseForCurrentMonth();
+
+    /**
+     * Returns the expense held by the model to update the GUI with.
+     */
+    double getExpense();
+
+    /**
+     * Updates the income tracked by the model by summing values from the {@code Transaction} in the filteredList.
+     */
+    void updateIncomeForCurrentMonth();
+
+    /**
+     * Returns the income held by the model to update the GUI with.
+     */
+    double getIncome();
 
     /**
      * Returns if {@code transaction} is currently in {@code FilteredList<Transaction>}.
