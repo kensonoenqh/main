@@ -45,6 +45,9 @@ public class CloneCommand extends ScrollingCommand implements Undoable {
 
     public static final String MESSAGE_CLONE_TRANSACTION_SUCCESS = "Cloned transaction: %1$s";
 
+    public static final String UNDO_SUCCESS = "Deleted cloned transaction: %1$s";
+    public static final String REDO_SUCCESS = "Added cloned transaction: %1$s";
+
     private final Index targetIndex;
     private Transaction clonedTransaction;
 
@@ -79,7 +82,8 @@ public class CloneCommand extends ScrollingCommand implements Undoable {
         // Use null comparison instead of requireNonNull(transactionListPanel) as current JUnit tests are unable to
         // handle JavaFX initialization
         if (model.isInView(clonedTransaction) && transactionListPanel != null) {
-            transactionListPanel.getTransactionListView().scrollTo(clonedTransaction);
+            int cloneIndex = model.getFilteredTransactionList().size() - 1;
+            transactionListPanel.getTransactionListView().scrollTo(cloneIndex);
         }
 
         return new CommandResult(String.format(MESSAGE_CLONE_TRANSACTION_SUCCESS, clonedTransaction));
@@ -113,18 +117,20 @@ public class CloneCommand extends ScrollingCommand implements Undoable {
     }
 
     @Override
-    public void undo(Model model) {
+    public String undo(Model model) {
         requireNonNull(model);
-        model.deleteLastTransaction();
+        Transaction deletedTransaction = model.deleteLastTransaction();
+        return String.format(UNDO_SUCCESS, deletedTransaction);
     }
 
     @Override
-    public void redo(Model model) {
+    public String redo(Model model) {
         requireAllNonNull(model, clonedTransaction);
         if (clonedTransaction instanceof Expense) {
             model.addExpense((Expense) clonedTransaction);
         } else if (clonedTransaction instanceof Income) {
             model.addIncome((Income) clonedTransaction);
         }
+        return String.format(REDO_SUCCESS, clonedTransaction);
     }
 }

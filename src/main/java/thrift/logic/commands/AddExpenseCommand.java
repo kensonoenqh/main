@@ -6,6 +6,7 @@ import static thrift.commons.util.CollectionUtil.requireAllNonNull;
 import thrift.logic.parser.CliSyntax;
 import thrift.model.Model;
 import thrift.model.transaction.Expense;
+import thrift.model.transaction.Transaction;
 import thrift.ui.TransactionListPanel;
 
 /**
@@ -49,6 +50,8 @@ public class AddExpenseCommand extends ScrollingCommand implements Undoable {
             + CliSyntax.PREFIX_TAG + "Meal ";
 
     public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
+    public static final String UNDO_SUCCESS = "Deleted expense: %1$s";
+    public static final String REDO_SUCCESS = "Added expense: %1$s";
 
     private final Expense toAdd;
 
@@ -68,7 +71,8 @@ public class AddExpenseCommand extends ScrollingCommand implements Undoable {
         // Use null comparison instead of requireNonNull(transactionListPanel) as current JUnit tests are unable to
         // handle JavaFX initialization
         if (model.isInView(toAdd) && transactionListPanel != null) {
-            transactionListPanel.getTransactionListView().scrollTo(toAdd);
+            int addIndex = model.getFilteredTransactionList().size() - 1;
+            transactionListPanel.getTransactionListView().scrollTo(addIndex);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
@@ -81,14 +85,16 @@ public class AddExpenseCommand extends ScrollingCommand implements Undoable {
     }
 
     @Override
-    public void undo(Model model) {
+    public String undo(Model model) {
         requireNonNull(model);
-        model.deleteLastTransaction();
+        Transaction deleteTransaction = model.deleteLastTransaction();
+        return String.format(UNDO_SUCCESS, deleteTransaction);
     }
 
     @Override
-    public void redo(Model model) {
+    public String redo(Model model) {
         requireAllNonNull(model, toAdd);
         model.addExpense(toAdd);
+        return String.format(REDO_SUCCESS, toAdd);
     }
 }
