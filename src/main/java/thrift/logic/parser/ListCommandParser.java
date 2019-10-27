@@ -1,6 +1,6 @@
 package thrift.logic.parser;
 
-import java.time.Month;
+import java.util.Calendar;
 import java.util.stream.Stream;
 
 import thrift.commons.core.Messages;
@@ -27,7 +27,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)
                 && !args.isEmpty()) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListCommand.MESSAGE_USAGE)); //prefix m/ is not present so there are invalid arguments
+                    ListCommand.MESSAGE_USAGE)); //prefix m/ is not present so the argument present is invalid
         }
 
         return getCommand(argMultimap);
@@ -39,10 +39,10 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     ListCommand.MESSAGE_USAGE)); //prefix m/ exists, but there is invalid preamble before the prefix.
         } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)) {
-            Month month = ParserUtil.parseMonth(argMultimap.getValue(CliSyntax.PREFIX_MONTH).get()); //to be used
-            return new ListCommand(); //filter by month tbc, to look like return new ListCommand(month);
+            Calendar date = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_MONTH).get());
+            return new ListCommand(date);
         } else {
-            return new ListCommand(); //list all transactions, as prefix m/ does not exist.
+            return new ListCommand();
         }
     }
 
