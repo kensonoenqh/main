@@ -6,7 +6,6 @@ import java.util.Calendar;
 
 import thrift.logic.parser.CliSyntax;
 import thrift.model.Model;
-import thrift.model.transaction.TransactionIsInMonthYearPredicate;
 
 /**
  * Lists all transactions in THRIFT to the user.
@@ -46,13 +45,14 @@ public class ListCommand extends NonScrollingCommand {
 
     @Override
     public CommandResult execute(Model model) {
+        requireNonNull(model);
+
         if (this.monthyear == null) {
-            requireNonNull(model);
             model.updateFilteredTransactionList(Model.PREDICATE_SHOW_ALL_TRANSACTIONS);
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
-            requireNonNull(model);
-            model.updateFilteredTransactionList(new TransactionIsInMonthYearPredicate(this.monthyear));
+            model.setCurrentMonthYear(this.monthyear);
+            model.updateFilteredTransactionListToCurrentMonth();
             return new CommandResult(MESSAGE_SUCCESS_MONTH_FILTER);
         }
     }
