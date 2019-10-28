@@ -13,7 +13,7 @@ import thrift.logic.parser.exceptions.ParseException;
 public class ListCommandParser implements Parser<ListCommand> {
 
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format! "
-            + CliSyntax.PREFIX_MONTH + "MONTH (must be of format MMM)\n";
+            + CliSyntax.PREFIX_MONTH + "MONTH (must be of format MM/yyyy)\n + MM should be between 01 to 12";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -39,7 +39,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
                     ListCommand.MESSAGE_USAGE)); //prefix m/ exists, but there is invalid preamble before the prefix.
         } else if (arePrefixesPresent(argMultimap, CliSyntax.PREFIX_MONTH)) {
-            Calendar date = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_MONTH).get());
+            Calendar date = ParserUtil.parseDate(argMultimap.getSingleValue(CliSyntax.PREFIX_MONTH).get());
             return new ListCommand(date);
         } else {
             return new ListCommand();
