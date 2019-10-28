@@ -12,6 +12,7 @@ import thrift.logic.parser.exceptions.ParseException;
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
+    //this string will be used if i use ParserUtil#parseMonth in the future.
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Invalid month format! "
             + CliSyntax.PREFIX_MONTH + "MONTH (must be of format MM/yyyy)\n + MM should be between 01 to 12";
 
