@@ -7,7 +7,6 @@ import static thrift.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import org.junit.jupiter.api.Test;
 
 import thrift.logic.commands.ListCommand;
-import thrift.model.transaction.TransactionIsInMonthYearPredicate;
 
 public class ListCommandParserTest {
 
@@ -17,10 +16,10 @@ public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsListCommand() {
         // no leading and trailing whitespaces
         ListCommand expectedListCommand =
-                new ListCommand(new TransactionIsInMonthYearPredicate(ParserUtil.parseDate("09/2019")));
+                new ListCommand(ParserUtil.parseDate("09/2019"));
 
         assertParseSuccess(parser, "m/09/2019", expectedListCommand);
     }
@@ -28,6 +27,11 @@ public class ListCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, " r/invalidprefix", MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, " invalidpreamble" + "m/10/2019", MESSAGE_INVALID_FORMAT);
+
     }
 
 }
