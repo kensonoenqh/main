@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import thrift.logic.commands.CommandTestUtil;
 import thrift.logic.commands.ListCommand;
-import thrift.logic.parser.exceptions.ParseException;
 
 public class ListCommandParserTest {
 
@@ -41,7 +40,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_allFieldsPresent_success() throws ParseException {
+    public void parse_allFieldsPresent_success() {
         // includes month prefix, list transactions by some specific month (jan 2019).
         assertDoesNotThrow(() -> parser.parse(CommandTestUtil.MONTH_JAN_19));
     }
