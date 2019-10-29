@@ -14,6 +14,9 @@ public class ListCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
 
+    private static final String MESSAGE_INVALID_DATE_FORMAT = "Month should be in the following format: MM/yyyy."
+            + ", where MM is an integer between 01-12";
+
     private ListCommandParser parser = new ListCommandParser();
 
     @Test
@@ -31,6 +34,14 @@ public class ListCommandParserTest {
 
         assertParseFailure(parser, " invalidpreamble" + "m/10/2019", MESSAGE_INVALID_FORMAT);
 
+        //month not within specified range or not in proper syntax
+        assertParseFailure(parser, " m/13/2019", MESSAGE_INVALID_DATE_FORMAT);
+
+        assertParseFailure(parser, " m/00/2019", MESSAGE_INVALID_DATE_FORMAT);
+
+        assertParseFailure(parser, " m/012019", MESSAGE_INVALID_DATE_FORMAT);
+
+        assertParseFailure(parser, " m/1/2019", MESSAGE_INVALID_DATE_FORMAT);
     }
 
     @Test
