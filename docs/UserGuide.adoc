@@ -429,10 +429,10 @@ image::find/Step3.png[,550]
 
 [[ListTag]]
 === Listing transactions with the use of filters: `list`
-THRIFT allows you to list out all the transactions, and filter by month or tag if you wish to as well.
+THRIFT allows you to list out all the transactions, and filter by month if you wish to as well.
 
 ==== Command syntax:
-`list [m/MONTH] [t/TAGNAME]...`
+`list [m/MONTH]`
 
 ****
 * Multiple filters can be used, and transactions that pass all the filters will be listed.
@@ -523,8 +523,8 @@ Example: `delete i/1`
 Example: `update i/1 n/Curry Laksa v/5 t/Lunch t/Dinner`
 * <<CloneTag, *Clone*>>: `clone i/INDEX` +
 Example: `clone i/1`
-* <<ListTag, *List*>>: `list [m/MONTH] [t/TAG]` +
-Example: `list m/01/2019 t/Food`
+* <<ListTag, *List*>>: `list [m/MONTH]` +
+Example: `list m/01/2019`
 * <<TagTag,*Tag*>>: `tag i/INDEX t/TAG_NAME` +
 Example: `tag i/8 t/Debt`
 * <<UntagTag, *Untag*>>: `untag i/INDEX t/TAG_NAME` +
