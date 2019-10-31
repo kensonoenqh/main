@@ -441,9 +441,9 @@ THRIFT allows you to list out all the transactions, and filter by month or tag i
 ==== Example usage:
 Imagine that you wanted to take a look at how much you spent and saved the previous month! For example, Oct 2019.
 
-To `list` the transactions by a specific month(Oct 2019):
+To `list` the transactions of Oct 2019:
 
-. The default interface shows all transactions for the current month, in this case Oct 2019.
+. The default interface shows all transactions for the current month, in this case Nov 2019.
 +
 image::list/Step1.png[,550]
 
