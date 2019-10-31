@@ -481,7 +481,11 @@ THRIFT allows you to list out all the transactions, and filter by month if you w
 `list [m/MONTH]`
 
 ****
-* Multiple filters can be used, and transactions that pass all the filters will be listed.
+* Sets the filter to the month specified in `MONTH`.
+* `MONTH` is in `MM/YYYY`:
+** `MM` is between `01-12`.
+** `YYYY` is between `0001-9999`.
+* If `m/MONTH` is left out then all transactions will be shown.
 ****
 
 ==== Example usage:
