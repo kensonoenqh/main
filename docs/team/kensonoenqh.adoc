@@ -38,10 +38,15 @@ There are various text styles used in this portfolio and its usages are explaine
 
 NOTE: This symbol denotes information that you may want to take note of when using the application.
 
+The following text styles are only applicable to the section on the User Guide:
+
+[horizontal]
+`list`:: Text with a grey highlight (called a mark-up) indicates that it is a command, or a part of it.
+
 The following text styles are only applicable to the section on the Developer Guide:
 
 [horizontal]
-*list*:: Bold text indicates user input.
+*m/MONTH*:: Bold text indicates user input.
 
 `parse`:: Text with grey highlight (called a mark-up) indicates that it is a method/variable name.
 
