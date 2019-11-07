@@ -585,7 +585,7 @@ image::list/Step1.png[,550]
 +
 image::list/Step2.png[,550]
 
-. Your transaction list will now show all transactions that were added in Oct 2019. Also, the income, expense, and balance
+. Your transaction list will now show all transactions that were added in Oct 2019. The income, expense, and balance
 values in the UI will be updated to reflect the correct values for the month as well! Lastly, the filter icon will update to
 show you what filter is currently in use, in case you are ever confused about the current list of transactions shown.
 +
