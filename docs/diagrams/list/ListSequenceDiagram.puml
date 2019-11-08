@@ -48,7 +48,6 @@ deactivate ThriftParser
 LogicManager -> ListCommand : execute()
 activate ListCommand
 
-ListCommand -> Model
 activate Model
 
 alt show all transactions

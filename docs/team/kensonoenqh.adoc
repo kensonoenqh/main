@@ -96,7 +96,7 @@ transactions by using a `**Predicate**`. This implementation can be easily exten
 implement filtering by, for example, `**Tag**`, there will not be extra difficulties faced in implementation.
 
 === 2.2 Code contributed
-Please follow these links to see a sample of my code: [https://github.com/AY1920S1-CS2103T-W12-2/main/commits/master?author=kensonoenqh[Commits]]
+Please follow these links to see my code: [https://github.com/AY1920S1-CS2103T-W12-2/main/commits/master?author=kensonoenqh[Commits]]
  [https://github.com/AY1920S1-CS2103T-W12-2/main/pulls?utf8=%E2%9C%93&q=is%3Amerged+is%3Apr+author%3Akensonoenqh[Pull requests]]
   [https://nus-cs2103-ay1920s1.github.io/tp-dashboard/#search=kensonoenqh&sort=groupTitle&sortWithin=title&since=2019-09-06&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=kensonoenqh&tabRepo=AY1920S1-CS2103T-W12-2%2Fmain%5Bmaster%5D[RepoSense Code Contribution Dashboard]]
 
@@ -116,7 +116,7 @@ the user interface was not able to update properly. (Pull request https://github
 in THRIFT. (Pull request https://github.com/AY1920S1-CS2103T-W12-2/main/pull/179[#179], https://github.com/AY1920S1-CS2103T-W12-2/main/pull/272[#272])
 
 * Community:
-** Reviewed pull requests of features and documentation. (with non-trivial comments): (Pull requests https://github.com/AY1920S1-CS2103T-W12-2/main/pull/81[#81],
+** Reviewed pull requests of features and documentation: (Pull requests https://github.com/AY1920S1-CS2103T-W12-2/main/pull/81[#81],
 https://github.com/AY1920S1-CS2103T-W12-2/main/pull/227[#227])
 
 == 3. Contributions to the User Guide
