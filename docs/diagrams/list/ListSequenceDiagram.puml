@@ -53,13 +53,11 @@ activate Model
 
 alt show all transactions
     ListCommand -> Model: updateFilteredTransactionList(Model.PREDICATE_SHOW_ALL_TRANSACTIONS)
-Model --> ListCommand
 
 else filter transactions by monthyear
     ListCommand -> Model: setCurrentMonthYear()
     ListCommand -> Model: updateFilteredTransactionListToCurrentMonth()
 
-Model --> ListCommand
 deactivate Model
 end
 
