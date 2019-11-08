@@ -48,10 +48,9 @@ deactivate ThriftParser
 LogicManager -> ListCommand : execute()
 activate ListCommand
 
-activate Model
-
 alt show all transactions
     ListCommand -> Model: updateFilteredTransactionList(Model.PREDICATE_SHOW_ALL_TRANSACTIONS)
+    activate Model
 
 else filter transactions by monthyear
     ListCommand -> Model: setCurrentMonthYear()
