@@ -6,37 +6,64 @@
 
 == 1. Introduction
 This portfolio documents my roles and contributions to the team project THRIFT. This project was part of
-the requirements of a year two software engineering module, CS2103T, that my team, a group of 5 year 2 undergraduates had
-taken in NUS.
+the requirements of a year two software engineering module, CS2103T, that I took as an undergraduate in NUS.
 
-In this project, I had the role of Process Analyst, and I was in charge of leading and coordinating business use-case
-modeling by outlining and delimiting the organization being modeled.
+=== 1.1 About the team
+The THRIFT team consists of a group of 5 year 2 undergraduates which includes myself. In this project, I had the role of
+Process Analyst, and I was in charge of leading and coordinating business use-case modeling by outlining and delimiting
+the organization being modeled.
 
-My team members were: `Lim Jia Hao` (Team Lead), `Lee Bo Qiang` (User Experience Developer), `Melvin Ang` (Software Architect) and `Lye Jian Wen`
-(Quality Assurance Manager). We all had major yet different roles to play and we had to work closely together in order to
-ensure that THRIFT is successful.
+My team members and their various roles were: `Lim Jia Hao` (Team Lead), `Lee Bo Qiang` (User Experience Developer),
+ `Melvin Ang` (Software Architect) and `Lye Jian Wen` (Quality Assurance Manager). We had major yet different roles to
+play in creating THRIFT and we worked closely together in order to ensure that THRIFT was successful.
 
-=== 1.1 Project: THRIFT
+=== 1.2 Project: THRIFT
 THRIFT is a finance tracker desktop application targeting money-conscious NUS students who wish to keep their spending
-in check. As befitting a finance tracker, it allows its users to set a budget for each month and track incoming and outgoing
-transactions. By showing the remaining budget clearly in the user interface, it reduces the possibility of our users overspending
-their budget. As part of the project requirement, we had to work under the constraint that the application required the use
-of a command line interface (CLI).
+in check.
 
+==== 1.2.1 Main features of THRIFT
+As befitting a finance tracker, THRIFT allows its users to set a budget for each month and track incoming and outgoing
+transactions by adding and deleting them. Showing the remaining budget clearly in the user interface reduces the possibility of our users overspending
+their budget.
+
+THRIFT helps our users better keep track of each transaction by allowing the transactions to be tagged. Tagging transactions
+with tags such as Food or Transport will improve visibility and help to categorise the transactions.
+
+THRIFT is able to filter transactions by month. This enhances our users' ability to keep track of their spending over
+a long period of time, and allows them to compare monthly expenses. The find command is also very helpful in locating
+specific transactions, if a user wishes to do so.
+
+Thrift is very user friendly, and users can make use of the undo and redo feature to help with any mistakes that have
+occurred when they use a command wrongly. Thus, even mistake-prone users are able to use THRIFT efficiently to track
+their finances.
+
+==== 1.2.2 Project requirements
+As part of the project requirements, we had to work under the constraint that the application required the use
+of a command line interface (CLI). As such, the user would be able to interact with our app using a single line of text to
+execute any single command.
+
+==== 1.2.3 THRIFT'S user interface
 The following image shows how THRIFT's user interface looks like:
 
 .Main window of THRIFT which displays the user's balance as well as their transactions
 image::../images/UGUI.png[,700]
 
-=== 1.2 Background of THRIFT
+=== 1.3 Background of THRIFT
 THRIFT is morphed from the original https://github.com/nus-cs2103-AY1920S1/addressbook-level3[AddressBook-Level3] application which allows users to add contacts to create a personalised list.
 My team and I have since transformed the application into a finance tracker to better suit our purposes and intended target
 audience of students.
 
-=== 1.3 Understanding this document
+=== 1.4 Understanding this document
 There are various text styles used in this portfolio and its usages are explained below:
 
 NOTE: This symbol denotes information that you may want to take note of when using the application.
+
+The following text styles are only applicable to the section on the Summary of Contributions:
+
+[horizontal]
+*m/MONTH*:: Bold text indicates that it is a command, or a part of it.
+
+`**Tag**`:: Bold text with mark-up indicates a class/package name.
 
 The following text styles are only applicable to the section on the User Guide:
 
@@ -54,7 +81,8 @@ The following text styles are only applicable to the section on the Developer Gu
 
 == 2. Summary of Contributions
 This section provides a summary on the various contributions that I have made to THRIFT.
-My role was to design and write the code for the list feature. In this section, these enhancements will be illustrated in detail.
+My main role was to design and write the code for the list feature, and enhance it to allow filtering of transactions.
+In this section, these enhancements will be illustrated in detail.
 
 === 2.1 Enhancements made
 **Major enhancements:**
@@ -88,7 +116,8 @@ the user interface was not able to update properly. (Pull request https://github
 in THRIFT. (Pull request https://github.com/AY1920S1-CS2103T-W12-2/main/pull/179[#179], https://github.com/AY1920S1-CS2103T-W12-2/main/pull/272[#272])
 
 * Community:
-** Reviewed pull requests of features and documentation. (with non-trivial comments): (Pull requests https://github.com/AY1920S1-CS2103T-W12-2/main/pull/81[#81], https://github.com/AY1920S1-CS2103T-W12-2/main/pull/227[#227])
+** Reviewed pull requests of features and documentation. (with non-trivial comments): (Pull requests https://github.com/AY1920S1-CS2103T-W12-2/main/pull/81[#81],
+https://github.com/AY1920S1-CS2103T-W12-2/main/pull/227[#227])
 
 == 3. Contributions to the User Guide
 The following section illustrates my ability in writing documentation to guide end-users on using the various features of THRIFT.
@@ -173,7 +202,8 @@ Step 2. The `**ListCommandParser**` will parse the arguments using the method `L
 Step 3. Since user input is correct and the arguments have been parsed, a new `**ListCommand**` object will be created by the
 `**ListCommandParser**`.
 
-Step 4. This `**ListCommand**` object will use a `**Predicate**` based on the specified month which is used to filter through each `**Transaction**`.
+Step 4. This `**ListCommand**` object will use a `**Predicate**` based on the specified month which is used to filter
+through each `**Transaction**`.
 
 Step 5. The final list of filtered transactions will be brought up. The income, expense, and balance values in the UI will
 be updated accordingly as well, to reflect the correct values for the filtered month.
@@ -190,12 +220,13 @@ image::list/ListActivityDiagram.png[]
 ===== Aspect: Using `**Predicate**` to improve extendability of the feature in the future
 
 * **Alternative 1 (current choice):** Create a new `**Predicate**` based on the arguments each time.
-** Pros: The filter feature could be added to and improved in the future to further accommodate new arguments other than month and tag,
-and still be able to filter by a combination of the different arguments.
+** Pros: The filter feature could be added to and improved in the future to further accommodate new arguments other than
+month and tag, and still be able to filter by a combination of the different arguments.
 ** Cons: Not as easy to implement.
 * **Alternative 2:** Use a fixed `**Predicate**` written beforehand to filter the list for each argument.
 ** Pros: Straightforward to implement, a specific `**Predicate**` can be used for the specific argument.
-** Cons: Not easily extendable as in the future if we want to filter by new arguments, we will have to write a new `**Predicate**` for each argument.
+** Cons: Not easily extendable as in the future if we want to filter by new arguments, we will have to write a new
+`**Predicate**` for each argument.
 
 Eventually we may decide to use a combination of both alternatives as it is possible that different arguments are easier to
 implement using different methods.
