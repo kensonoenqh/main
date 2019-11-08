@@ -208,9 +208,9 @@ created using the tag in the argument as well. By doing so, we reduce the diffic
 the future. This would benefit the simplicity of the command and further enhance the user experience, for them to be able
 to filter by a combination of both months and tags.
 
-The image below shows a possible view of the possible future results of implementing this feature:
+The image below shows how a possible future implementation of this feature could look like:
 
-.Expected view after filtering by both Nov 2019 and Transport.
+.Expected result of filtering by both Nov 2019 and Transport.
 image::list/TagFilter.png[,550]
 
 _{End of extract}_
