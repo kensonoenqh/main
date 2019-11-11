@@ -1873,7 +1873,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Listing the transactions
 
-. Listing out transactions by month or by tag.
+. Listing out transactions by month.
 
 .. Prerequisites: At least one transaction in the list.
 .. Test case: **list** +
